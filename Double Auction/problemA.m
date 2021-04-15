@@ -4,7 +4,7 @@ m = size(B,1);
 n = size(B,2);
 
 C = optimvar('x',m,n,'LowerBound',0);     % Electricity demand of charging vehicles
-D = optimvar('y',m,n,'LowerBound',0);      % Electricity supply by discharging vehicles
+D = optimvar('y',m,n,'LowerBound',0);     % Electricity supply by discharging vehicles
 
 prob = optimproblem;
 prob.Objective = fcn2optimexpr(@objective,C,D,B,S);    
