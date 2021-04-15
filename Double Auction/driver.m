@@ -16,7 +16,7 @@ neta  = 1;                  % Average charging efficiency
 rho = 0.9;                  % Average electricity transmission efficiency
 tau = 0.5;                  % Constant
 l1 = 0.9;                   % Cost factor 1
-l2 = 0.2;                  % Cost factor 2
+l2 = 0.2;                   % Cost factor 2
 STO = randi([0 10],m,1);    % Energy state before charging
 
 %Algorithm
@@ -28,8 +28,8 @@ while flag == 1
     S_prev = S;                                                  % Placeholder variable to store value of S
     B = problemEB(C,neta,tau,C_min,STO);                         % Problem EB solved to get new B
     S = problemES(D,l1,l2);                                      % Problem ES solved to get new S
-    RDB = mean2((abs(B - B_prev))./B);                             % RDB calculation for convergence check
-    RDS = mean2((abs(S - S_prev))./S);                             % RDS calculation for convergence check
+    RDB = mean2((abs(B - B_prev))./B);                           % RDB calculation for convergence check
+    RDS = mean2((abs(S - S_prev))./S);                           % RDS calculation for convergence check
     t = t+1;
     if (RDB<epsi) && (RDS<epsi)                                  % Convergence check
         flag = 0;                                                % If converged, our algorithm has finished
