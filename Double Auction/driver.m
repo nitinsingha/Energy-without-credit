@@ -22,7 +22,15 @@ l2 = 0.015;                  % Cost factor 2
 STO = randi([1 5],m,1);      % Energy state before charging
 
 %Social Welfare
-sw = zeros(20,1);
+sw = zeros(18,1);
+%Charging Electricity
+ce = zeros(18,1);
+%Discharging Electricity
+de = zeros(18,1);
+%Average payment
+ap = zeros(18,1);
+%Average reward
+ar = zeros(18,1);
 
 %Algorithm
 flag = 1;                   % Convergence checker variable
@@ -30,6 +38,10 @@ t = 1;
 while flag == 1
     [C, D] = problemA(B,S,neta,rho,C_min,C_max,D_max);           % Problem A solved to get C and D from initial B and S
     sw(t) = socialWelfare(C,D,neta,tau,STO,C_min,l1,l2);
+    ce(t) = sum(C(1,:));
+    de(t) = sum(D(:,1));
+    ap(t) = avgPayment(C, neta, tau, STO, C_min);
+    ar(t) = avgReward(D, l1, l2);
     B_prev = B;                                                  % Placeholder variable to store value of B
     S_prev = S;                                                  % Placeholder variable to store value of S
     B = problemEB(C,neta,tau,C_min,STO);                         % Problem EB solved to get new B
@@ -44,3 +56,22 @@ while flag == 1
 end
 
 %C, D, B, S are final results
+
+%Plots
+figure
+plot(sw, '-b')
+legend('Social Welfare')
+
+figure
+hold on
+plot(ce, '-b')
+plot(de, '--r')
+legend('Charging Electricity', 'Discharging Electricity')
+hold off
+
+figure
+hold on
+plot(ap, '-b')
+plot(ar, '--r')
+legend('Average Payment', 'Average Reward')
+hold off
