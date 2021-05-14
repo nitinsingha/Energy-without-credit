@@ -1,4 +1,4 @@
 This is the repository for double auction method code
 
-driver.m, problemA.m, problemEB.m, problemES.m, socialWelfare.m are the newly written files for double auction method; all variables and initialisations have to be done in driver.m
+driver.m, problemA.m, problemEB.m, problemES.m, socialWelfare.m, avgPayment.m, avgReward.m are the newly written files for double auction method; all variables and initialisations have to be done in driver.m
 running driver.m then implements the double auction algorithm
