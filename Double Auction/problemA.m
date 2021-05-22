@@ -17,7 +17,7 @@ prob.Constraints.cons4 = (rho*D == C);                        % they are written
 x0.x = ones(m,n);
 x0.y = ones(m,n);
 
-options = optimoptions(@fmincon,'MaxFunctionEvaluations',25000);                     % Solving the optimisation problem
+options = optimoptions(@fmincon,'MaxFunctionEvaluations',25000,'PlotFcns',@optimplotfval,'Display','iter'); % Solving the optimisation problem
 [solution,fval,exitflag,output] = solve(prob,x0,'Options',options);                  % using inbuilt optimiser.
 C_new = solution.x;
 D_new = solution.y;

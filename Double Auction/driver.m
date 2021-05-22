@@ -16,7 +16,7 @@ D_max = randi([10 20],n,1);   % Maximum electricity supply of discharging vehicl
 epsi = 0.001;                % Convergence criterion parameter
 neta  = 0.8;                 % Average charging efficiency
 rho = 0.9;                   % Average electricity transmission efficiency
-tau = 0.5;                   % Constant
+tau = 0.5;                     % Constant
 l1 = 0.01;                   % Cost factor 1
 l2 = 0.015;                  % Cost factor 2
 STO = randi([1 5],m,1);      % Energy state before charging
@@ -38,10 +38,12 @@ t = 1;
 while flag == 1
     [C, D] = problemA(B,S,neta,rho,C_min,C_max,D_max);           % Problem A solved to get C and D from initial B and S
     sw(t) = socialWelfare(C,D,neta,tau,STO,C_min,l1,l2);
-    ce(t) = sum(C(1,:));
+    ce(t) = sum(D(2,:));
     de(t) = sum(D(:,1));
-    ap(t) = avgPayment(C, neta, tau, STO, C_min);
-    ar(t) = avgReward(D, l1, l2);
+    %ap(t) = avgPayment(C, neta, tau, STO, C_min);
+    ap(t) = avgPaymentNew(B);
+    %ar(t) = avgReward(D, l1, l2);
+    ar(t) = avgRewardNew(S, l1);
     B_prev = B;                                                  % Placeholder variable to store value of B
     S_prev = S;                                                  % Placeholder variable to store value of S
     B = problemEB(C,neta,tau,C_min,STO);                         % Problem EB solved to get new B
@@ -59,19 +61,25 @@ end
 
 %Plots
 figure
-plot(sw, '-b')
+plot(sw(1:end), '-b')
 legend('Social Welfare')
+xlabel('Iterations')
+ylabel('Social Welfare')
 
 figure
 hold on
-plot(ce, '-b')
-plot(de, '--r')
+plot(ce(1:end), '-b')
+plot(de(1:end), '--r')
 legend('Charging Electricity', 'Discharging Electricity')
+xlabel('Iterations')
+ylabel('Amount if traded electricity')
 hold off
 
 figure
 hold on
-plot(ap, '-b')
-plot(ar, '--r')
+plot(ap(2:end), '-b')
+plot(ar(2:end), '--r')
 legend('Average Payment', 'Average Reward')
+xlabel('Iterations')
+ylabel('Average payment/reward')
 hold off
