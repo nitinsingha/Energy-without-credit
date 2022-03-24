@@ -1,0 +1,17 @@
+function [points] = generate_coordinates(R,N)
+R = 2*CONST.n;
+points  =[];
+
+for i = 1:N    % The coordinates of all nodes are generated. 
+    r = R * sqrt(rand());
+    theta = rand() * 2 * pi;
+    pt.x = r * cos(theta);
+    pt.y = r * sin(theta);
+    points = [points,pt];
+end
+
+
+
+
+
+
