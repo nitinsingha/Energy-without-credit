@@ -1,1 +1,7 @@
 This folder contains scripts for the situation when the number of buyers and sellers are not equal.
+
+
+For varying number of sellers m and consumers n, follwing changes have been made in the exisrting code.
+DAM code: Changes have been made ine the driver file and problemA fiel
+FFS code: Data file has been changed
+NEM and EM code: 1. Data file has been changed. 2. Network constants file has been changed. 
